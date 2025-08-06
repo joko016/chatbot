@@ -1,0 +1,9 @@
+{
+  "name": "exalted-christ-chatbot",
+  "version": "1.0.0",
+  "description": "Chatbot backend for The Exalted Christ website",
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  }
+}
