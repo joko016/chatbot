@@ -55,10 +55,11 @@ export default async function handler(req, res) {
       response: data.content[0].text 
     });
 
-  } catch (error) {
-    console.error('Error:', error);
+ } catch (error) {
+    console.error('Detailed error:', error.message);
+    console.error('Full error:', JSON.stringify(error));
     res.status(500).json({ 
-      error: 'Sorry, I encountered an error. Please try again.' 
+      error: 'Sorry, I encountered an error. Please try again.',
+      details: error.message 
     });
-  }
 }
