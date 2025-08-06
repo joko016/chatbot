@@ -20,17 +20,6 @@ export default async function handler(req, res) {
   try {
     const { message, context } = req.body;
 
-    const messages = [
-      {
-        role: 'system',
-        content: context + '\n\nIMPORTANT: Keep responses concise and helpful. Include relevant links to pages on theexaltedchrist.com when appropriate.'
-      },
-      {
-        role: 'user',
-        content: message
-      }
-    ];
-
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -41,11 +30,19 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'claude-3-haiku-20240307',
         max_tokens: 500,
-        messages: messages
+        system: context + '\n\nIMPORTANT: Keep responses concise and helpful. Include relevant links to pages on theexaltedchrist.com when appropriate.',
+        messages: [
+          {
+            role: 'user',
+            content: message
+          }
+        ]
       })
     });
 
     if (!response.ok) {
+      const errorData = await response.text();
+      console.error('Claude API error details:', errorData);
       throw new Error(`Claude API error: ${response.status}`);
     }
 
