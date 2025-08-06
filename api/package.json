@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Chatbot backend for The Exalted Christ website",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "22.x"
   }
